@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>EasyPost</id>
+        <version>1.0.0</version>
+        <title>Easy Post</title>
+        <authors>Eric Williams</authors>
+        <owners>Easy Post</owners>
+        <licenseUrl>https://raw.github.com/motowilliams/easypost-dotnet/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/EasyPost/easypost-dotnet</projectUrl>
+        <iconUrl>https://geteasypost.com/favicon.ico</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Client library for accessing the EasyPost Shipping API via C#</description>
+        <summary>EasyPost allows you to integrate postage with any application in minutes instead of weeks.</summary>
+        <copyright>2013</copyright>
+        <language>en-US</language>
+        <tags>parcel shipping fedex usps ups api httpapi</tags>
+        <dependencies>
+                <dependency id="Microsoft.AspNet.WebApi.Client" />
+                <dependency id="Microsoft.Net.Http" />
+                <dependency id="Newtonsoft.Json" />
+        </dependencies>
+        <frameworkAssemblies>
+            <frameworkAssembly assemblyName="System" targetFramework="net40" />
+            <frameworkAssembly assemblyName="System.Core" targetFramework="net40" />
+            <frameworkAssembly assemblyName="System.Net" targetFramework="net40" />
+        </frameworkAssemblies>
+    </metadata>
+    <files>
+        <file src="bin\Release\Easypost.dll" target="lib\Easypost.dll" />
+    </files>
+</package>
