@@ -15,8 +15,9 @@ namespace Easypost
         public string PurchasePostageUri { get; private set; }
         public string GetPostageUri { get; private set; }
         public string ListPostageUri { get; private set; }
+        public string RefundPostageUri { get; private set; }
 
-        public EasyPost(string apiKey, string baseAddress = "https://www.geteasypost.com/", string verifyAddressUri = "/api/address/verify", string calculatePostageUri = "/api/postage/rates", string purchasePostageUri = "/api/postage/buy", string getPostageUri = "/api/postage/get", string listPostageUri = "/api/postage/list")
+        public EasyPost(string apiKey, string baseAddress = "https://www.geteasypost.com/", string verifyAddressUri = "/api/address/verify", string calculatePostageUri = "/api/postage/rates", string purchasePostageUri = "/api/postage/buy", string getPostageUri = "/api/postage/get", string listPostageUri = "/api/postage/list", string refundPostageUri = "/api/v2/refunds")
         {
             ApiKey = apiKey;
             BaseAddress = baseAddress;
@@ -25,6 +26,7 @@ namespace Easypost
             PurchasePostageUri = purchasePostageUri;
             GetPostageUri = getPostageUri;
             ListPostageUri = listPostageUri;
+            RefundPostageUri = refundPostageUri;
         }
 
         /// <summary>
@@ -89,6 +91,19 @@ namespace Easypost
             if (string.IsNullOrWhiteSpace(ListPostageUri))
                 throw new ArgumentException("invalid url", ListPostageUri);
             return Execute<EasyPostPostageList>(ListPostageUri);
+        }
+
+        /// <summary>
+        /// Refunds Postage based on Carrier and Tracking Code
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        /// <seealso cref="https://geteasypost.com/docs/v2#refunds"/>
+        public EasyPostRefundResponse[] RefundPostage(EasyPostRefund model)
+        {
+            if (string.IsNullOrWhiteSpace(RefundPostageUri))
+                throw new ArgumentException("invalid url", RefundPostageUri);
+            return Execute<EasyPostRefundResponse[], EasyPostRefund>(model, RefundPostageUri);
         }
 
         private HttpClient CreateClient()
