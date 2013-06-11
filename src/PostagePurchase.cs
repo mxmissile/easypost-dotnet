@@ -32,7 +32,12 @@ namespace Easypost
                 .AddRequired("from[zip]".ToKvp(From.Zip))
                 .AddParcel(Parcel)
                 .AddRequired("carrier".ToKvp(Carrier))
-                .AddRequired("service".ToKvp(Service));
+                .AddRequired("service".ToKvp(Service));            
+                        
+            if (!string.IsNullOrEmpty(From.Phone))
+            {
+                collection.AddRequired("from[phone]".ToKvp(From.Phone));
+            }
             
             return collection.AsFormUrlEncodedContent();
         }
