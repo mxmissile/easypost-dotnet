@@ -21,7 +21,7 @@ namespace Easypost
         Shipment CreateShipment(Shipment model);
         Shipment GetShipment(string shipmentId);
         ShipmentRatesResponse GetShipmentRates(string shipmentId);
-        BuyPostageLabelResponse BuyPostageLabel(string shipmentId);
+        BuyPostageLabelResponse BuyPostageLabel(string shipmentId, CarrierRate rate));
         
         CustomsItem CreateCustomsItem(CustomsItem model);
         CustomsItem GetCustomsItem(string customsItemId);
@@ -122,10 +122,10 @@ namespace Easypost
             return Execute<ShipmentRatesResponse>(url);                
         }
 
-        public BuyPostageLabelResponse BuyPostageLabel(string shipmentId)
+        public BuyPostageLabelResponse BuyPostageLabel(string shipmentId, CarrierRate rate)
         {
             var url = string.Format(EasyPostUrls.SHIPMENT_BUY, shipmentId);
-            return Execute<BuyPostageLabelResponse>(url, HttpMethod.Post);
+            return Execute<BuyPostageLabelResponse>(rate, url);
         }
 
         public CustomsItem CreateCustomsItem(CustomsItem model)
@@ -203,10 +203,9 @@ namespace Easypost
             return JsonConvert.DeserializeObject<T>(response);
         }
 
-        private T Execute<T>(string apiUri, HttpMethod method = null)
+        private T Execute<T>(string apiUri)
         {
-            var requestMessage = new HttpRequestMessage(method ?? HttpMethod.Get, apiUri);
-            var responseMessage = _client.SendAsync(requestMessage).Result;
+            var responseMessage = _client.GetAsync(apiUri).Result;
             responseMessage.EnsureSuccessStatusCode();
             var response = responseMessage.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<T>(response);
