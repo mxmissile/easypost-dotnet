@@ -1,5 +1,3 @@
-using System;
-
 namespace Easypost
 {
     public abstract class ReponseBase

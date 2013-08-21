@@ -57,8 +57,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\Easypost.csproj">
-      <Project>{7DD7925D-6139-483E-BCE2-F0CC5624DC19}</Project>
+    <ProjectReference Include="..\Easypost\Easypost.csproj">
+      <Project>{a6947b9d-d1b2-4f9d-a7b3-05731e76a547}</Project>
       <Name>Easypost</Name>
     </ProjectReference>
   </ItemGroup>
