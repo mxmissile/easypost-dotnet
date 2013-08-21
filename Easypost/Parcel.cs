@@ -1,7 +1,8 @@
 using System.Net.Http;
+using Easypost.Internal;
 using Newtonsoft.Json;
 
-namespace Easypost
+namespace EasyPost
 {
     public class Parcel : EasyPostBase, IEncodable
     {
@@ -18,7 +19,7 @@ namespace Easypost
         public decimal? LengthInches { get; set; }
 
         [JsonProperty("predefined_package")]
-        public ParcelType PredefinedPackage { get; set; }
+        public ParcelType? PredefinedPackage { get; set; }
 
         public FormUrlEncodedContent AsFormUrlEncodedContent()
         {
@@ -38,7 +39,7 @@ namespace Easypost
             }
             else
             {
-                collection.Add("parcel[predefined_package]".ToKvp(PredefinedPackage.ToString()));
+                collection.Add("parcel[predefined_package]".ToKvp(PredefinedPackage.Value.ToString()));
             }
 
             return collection.AsFormUrlEncodedContent();

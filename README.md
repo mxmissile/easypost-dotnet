@@ -53,5 +53,5 @@ Client library for accessing the EasyPost Shipping API via C#
 
     var cheapestRate = shipment.Rates.OrderBy(x => x.Rate).First();
     
-    var label = easyPost.BuyPostageLabel(shipment.Id, cheapestRate).PostageLabel;
+    var label = easyPost.BuyPostageLabel(shipment.Id, cheapestRate);
 

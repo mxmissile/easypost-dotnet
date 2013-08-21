@@ -1,4 +1,4 @@
-namespace Easypost
+namespace EasyPost
 {
     public class VerifyAddressResponse : ReponseBase
     {

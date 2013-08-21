@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 
-namespace Easypost
+namespace Easypost.Internal
 {
     internal class CollectionBuilder
     {

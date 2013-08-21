@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace Easypost
+namespace EasyPost
 {
     public abstract class EasyPostBase
     {

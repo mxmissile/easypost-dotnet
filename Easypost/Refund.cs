@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Easypost
+namespace EasyPost
 {
     public class Refund : EasyPostBase
     {

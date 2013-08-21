@@ -1,8 +1,9 @@
+using EasyPost;
 using Newtonsoft.Json;
 
-namespace Easypost
+namespace Easypost.Internal
 {
-    public class BuyPostageLabelResponse : ReponseBase
+    internal class BuyPostageLabelResponse : ReponseBase
     {
         [JsonProperty("postage_label")]
         public PostageLabel PostageLabel { get; set; }

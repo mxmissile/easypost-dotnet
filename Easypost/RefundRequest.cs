@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
+using Easypost.Internal;
 
-namespace Easypost
+namespace EasyPost
 {
     public class RefundRequest : IEncodable
     {
         public string Carrier { get; set; }
-        public IEnumerable<string> TrackingCodes { get; set; }
+        public List<string> TrackingCodes { get; set; }
 
         public FormUrlEncodedContent AsFormUrlEncodedContent()
         {

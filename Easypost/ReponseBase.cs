@@ -1,4 +1,4 @@
-namespace Easypost
+namespace EasyPost
 {
     public abstract class ReponseBase
     {

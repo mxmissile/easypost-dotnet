@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Easypost
+namespace Easypost.Internal
 {
     internal static class CollectionExtensions
     {

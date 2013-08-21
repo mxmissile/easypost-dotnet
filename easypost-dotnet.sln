@@ -8,7 +8,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DB10EC
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Easypost", "Easypost\Easypost.csproj", "{A6947B9D-D1B2-4F9D-A7B3-05731E76A547}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyPost", "EasyPost\EasyPost.csproj", "{A6947B9D-D1B2-4F9D-A7B3-05731E76A547}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyPost.Api.Tests", "EasyPost.Api.Tests\EasyPost.Api.Tests.csproj", "{CF990656-CDD3-4E47-8658-B4F813641C44}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +22,10 @@ Global
 		{A6947B9D-D1B2-4F9D-A7B3-05731E76A547}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6947B9D-D1B2-4F9D-A7B3-05731E76A547}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6947B9D-D1B2-4F9D-A7B3-05731E76A547}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF990656-CDD3-4E47-8658-B4F813641C44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF990656-CDD3-4E47-8658-B4F813641C44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF990656-CDD3-4E47-8658-B4F813641C44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF990656-CDD3-4E47-8658-B4F813641C44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,8 +1,8 @@
 using System.Net.Http;
 
-namespace Easypost
+namespace Easypost.Internal
 {
-    public interface IEncodable
+    internal interface IEncodable
     {
         FormUrlEncodedContent AsFormUrlEncodedContent();
     }

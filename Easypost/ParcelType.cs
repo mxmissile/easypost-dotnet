@@ -1,50 +1,7 @@
-namespace Easypost
+namespace EasyPost
 {
-    public class ParcelType
+    public enum ParcelType
     {
-        public ParcelType(UspsParcelType type)
-        {
-            Usps = type;
-        }
-
-        public ParcelType(UpsParcelType type)
-        {
-            Ups = type;
-        }
-
-        public ParcelType(FedExParcelType type)
-        {
-            FedEx = type;
-        }
-
-        public UspsParcelType? Usps { get; private set; }
-        public UpsParcelType? Ups { get; private set; }
-        public FedExParcelType? FedEx { get; private set; }
-
-        public override string ToString()
-        {
-            if (Usps != null)
-            {
-                return Usps.ToString();
-            }
-
-            if (Ups != null)
-            {
-                return Ups.ToString();
-            }
-
-            if (FedEx != null)
-            {
-                return FedEx.ToString();
-            }
-
-            return string.Empty;
-        }
-    }
-
-    public enum UspsParcelType
-    {
-        Unknown,
         Card,
         Letter,
         Flat,
@@ -65,10 +22,6 @@ namespace Easypost
         RegionalRateBoxB,
         RegionalRateBoxC,
         LargeFlatRateBoardGameBox,
-    }
-
-    public enum UpsParcelType
-    {
         UPSLetter,
         UPSExpressBox,
         UPS25kgBox,
@@ -79,10 +32,6 @@ namespace Easypost
         SmallExpressBox,
         MediumExpressBox,
         LargeExpressBox,
-    }
-
-    public enum FedExParcelType
-    {
         FedExEnvelope,
         FedExBox,
         FedExPak,

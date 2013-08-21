@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using Easypost.Internal;
 using Newtonsoft.Json;
 
-namespace Easypost
+namespace EasyPost
 {
     public interface IEasyPostClient
     {
@@ -20,8 +21,8 @@ namespace Easypost
         
         Shipment CreateShipment(Shipment model);
         Shipment GetShipment(string shipmentId);
-        ShipmentRatesResponse GetShipmentRates(string shipmentId);
-        BuyPostageLabelResponse BuyPostageLabel(string shipmentId, CarrierRate rate));
+        List<CarrierRate> GetShipmentRates(string shipmentId);
+        PostageLabel BuyPostageLabel(string shipmentId, CarrierRate rate);
         
         CustomsItem CreateCustomsItem(CustomsItem model);
         CustomsItem GetCustomsItem(string customsItemId);
@@ -35,7 +36,7 @@ namespace Easypost
         ScanForm GetScanForm(string scanFormId);
         List<ScanForm> GetScanForms();
         
-        Refund CreateRefund(RefundRequest model);
+        List<Refund> CreateRefund(RefundRequest model);
         Refund GetRefund(string refundId);
         List<Refund> GetRefunds();
     }
@@ -116,16 +117,18 @@ namespace Easypost
             return Execute<Shipment>(url);
         }
 
-        public ShipmentRatesResponse GetShipmentRates(string shipmentId)
+        public List<CarrierRate> GetShipmentRates(string shipmentId)
         {
             var url = string.Format(EasyPostUrls.SHIPMENT_RATES, shipmentId);
-            return Execute<ShipmentRatesResponse>(url);                
+            var response = Execute<ShipmentRatesResponse>(url);
+            return response.Rates;
         }
 
-        public BuyPostageLabelResponse BuyPostageLabel(string shipmentId, CarrierRate rate)
+        public PostageLabel BuyPostageLabel(string shipmentId, CarrierRate rate)
         {
             var url = string.Format(EasyPostUrls.SHIPMENT_BUY, shipmentId);
-            return Execute<BuyPostageLabelResponse>(rate, url);
+            var response = Execute<BuyPostageLabelResponse>(rate, url);
+            return response.PostageLabel;
         }
 
         public CustomsItem CreateCustomsItem(CustomsItem model)
@@ -176,9 +179,9 @@ namespace Easypost
             return Execute<List<ScanForm>>(EasyPostUrls.SCAN_FORMS);
         } 
 
-        public Refund CreateRefund(RefundRequest model)
+        public List<Refund> CreateRefund(RefundRequest model)
         {
-            return Execute<Refund>(model, EasyPostUrls.REFUNDS);
+            return Execute<List<Refund>>(model, EasyPostUrls.REFUNDS);
         }
 
         public Refund GetRefund(string refundId)
@@ -229,8 +232,8 @@ namespace Easypost
             public const string CUSTOM_INFO = "customs_infos/{0}";
             public const string REFUNDS = "refunds";
             public const string REFUND = "refunds/{0}";
-            public const string BATCHES = "batches";
-            public const string BATCH = "batches/{0}";
+            //public const string BATCHES = "batches";
+            //public const string BATCH = "batches/{0}";
             public const string SCAN_FORMS = "scan_forms";
             public const string SCAN_FORM = "scan_forms/{0}";
         }

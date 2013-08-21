@@ -1,6 +1,7 @@
 using System.Net.Http;
+using Easypost.Internal;
 
-namespace Easypost
+namespace EasyPost
 {
     public class Address : EasyPostBase, IEncodable
     {

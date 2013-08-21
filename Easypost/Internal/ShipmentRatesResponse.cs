@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using EasyPost;
 
-namespace Easypost
+namespace Easypost.Internal
 {
-    public class ShipmentRatesResponse : ReponseBase
+    internal class ShipmentRatesResponse : ReponseBase
     {
         public List<CarrierRate> Rates { get; set; }
     }

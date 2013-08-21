@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Net.Http;
+using Easypost.Internal;
 using Newtonsoft.Json;
 
-namespace Easypost
+namespace EasyPost
 {
     public class CustomsInfo : EasyPostBase, IEncodable
     {
