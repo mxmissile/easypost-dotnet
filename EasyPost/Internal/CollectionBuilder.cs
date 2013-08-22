@@ -62,9 +62,9 @@ namespace Easypost.Internal
 
             if (parcel.PredefinedPackage == null)
             {
-                AddRequired("parcel[length]".ToKvp(keyBase, parcel.LengthInches));
-                AddRequired("parcel[width]".ToKvp(keyBase, parcel.WidthInches));
-                AddRequired("parcel[height]".ToKvp(keyBase, parcel.HeightInches));
+                AddRequired("[length]".ToKvp(keyBase, parcel.LengthInches));
+                AddRequired("[width]".ToKvp(keyBase, parcel.WidthInches));
+                AddRequired("[height]".ToKvp(keyBase, parcel.HeightInches));
             }
             else
             {

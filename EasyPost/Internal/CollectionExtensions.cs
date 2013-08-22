@@ -6,12 +6,12 @@ namespace Easypost.Internal
     {
         public static KeyValuePair<string, string> ToKvp(this string key, object value)
         {
-            return new KeyValuePair<string, string>(key, value.ToString());
+            return new KeyValuePair<string, string>(key, value == null ? null : value.ToString());
         }
 
         public static KeyValuePair<string, string> ToKvp(this string key, string baseKey, object value)
         {
-            return new KeyValuePair<string, string>(baseKey + key, value.ToString());
+            return new KeyValuePair<string, string>(baseKey + key, value == null ? null : value.ToString());
         }
     }
 }
