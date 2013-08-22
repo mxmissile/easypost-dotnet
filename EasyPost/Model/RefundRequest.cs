@@ -5,7 +5,9 @@ using Easypost.Internal;
 namespace EasyPost.Model
 {
     /// <summary>
-    /// TODO
+    /// USPS labels and postage can be refunded if requested within 10 days for domestic and international mail. 
+    /// To qualify, the item must not have been scanned by the USPS and must be requested within 10 days of printing.
+    /// UPS and FedEx shipments are paid for when they're processed, not when the label is generated, so refund requests for unused labels optional.
     /// </summary>
     public class RefundRequest : IEncodable
     {

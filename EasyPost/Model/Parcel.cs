@@ -4,6 +4,10 @@ using Newtonsoft.Json;
 
 namespace EasyPost.Model
 {
+    /// <summary>
+    /// Parcel objects represent the physical container being shipped. 
+    /// Please provide either the length, width, and height dimensions, or a predefined package.
+    /// </summary>
     public class Parcel : EasyPostBase, IEncodable
     {
         [JsonProperty("weight")]

@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace EasyPost.Model
 {
     /// <summary>
-    /// TODO
+    /// A purchased postage label.
     /// </summary>
     public class PostageLabel : EasyPostBase
     {

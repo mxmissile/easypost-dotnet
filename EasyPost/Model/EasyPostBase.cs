@@ -3,6 +3,9 @@ using Newtonsoft.Json;
 
 namespace EasyPost.Model
 {
+    /// <summary>
+    /// Base class for all EasyPost objects.
+    /// </summary>
     public abstract class EasyPostBase
     {
         public string Id { get; set; }

@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace EasyPost.Model
 {
     /// <summary>
-    /// TODO
+    /// Cost in USD that a carrier will charge for a shipment.
     /// </summary>
     public class CarrierRate : EasyPostBase, IEncodable
     {

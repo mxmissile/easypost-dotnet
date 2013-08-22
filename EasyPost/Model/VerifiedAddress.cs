@@ -1,7 +1,9 @@
 namespace EasyPost.Model
 {
     /// <summary>
-    /// TODO
+    /// Address representing closest verified address.
+    /// In some cases the address provided will be valid but will be missing some data, such as the apartment number. 
+    /// For these cases we return an address as well as a "message" field.
     /// </summary>
     public class VerifiedAddress
     {

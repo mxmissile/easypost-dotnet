@@ -6,8 +6,9 @@ using Newtonsoft.Json;
 namespace EasyPost.Model
 {
     /// <summary>
-    /// TODO
-    /// Required fields: ToAddress, FromAddress, Parcel
+    /// Shipments are made up of "to" and "from" addresses, the parcel being shipped, and any customs forms required for international deliveries. 
+    /// Once created a Shipment object can be used to retrieve shipping rates and purchase a postage label.
+    /// Shipments created with a valid to address, from address, and parcel will automatically retrieve available shipping rate options in the "rates" attribute.
     /// </summary>
     public class Shipment : EasyPostBase, IEncodable
     {

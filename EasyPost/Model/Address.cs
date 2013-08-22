@@ -4,8 +4,8 @@ using Easypost.Internal;
 namespace EasyPost.Model
 {
     /// <summary>
-    /// TODO
-    /// Required fields: Street1, Street2, City, State, Zip.
+    /// Address objects represent the origin and destination of any shipment, and are required in order to get rates and purchase postage.
+    // The phone attribute, and either a name or company are required for addresses used as a "from" address in a shipment.
     /// </summary>
     public class Address : EasyPostBase, IEncodable
     {

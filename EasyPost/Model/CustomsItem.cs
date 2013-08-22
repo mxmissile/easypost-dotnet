@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace EasyPost.Model
 {
     /// <summary>
-    /// TODO
+    /// Customs items describe goods for international shipment and are included in CustomsInfo objects.
     /// </summary>
     public class CustomsItem : EasyPostBase, IEncodable
     {

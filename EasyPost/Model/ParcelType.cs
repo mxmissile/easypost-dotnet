@@ -1,10 +1,11 @@
 namespace EasyPost.Model
 {
     /// <summary>
-    /// TODO
+    /// Predefined package sizes for USPS, UPS and FedEx
     /// </summary>
     public enum ParcelType
     {
+        // USPS
         Card,
         Letter,
         Flat,
@@ -25,6 +26,8 @@ namespace EasyPost.Model
         RegionalRateBoxB,
         RegionalRateBoxC,
         LargeFlatRateBoardGameBox,
+
+        // UPS
         UPSLetter,
         UPSExpressBox,
         UPS25kgBox,
@@ -35,6 +38,8 @@ namespace EasyPost.Model
         SmallExpressBox,
         MediumExpressBox,
         LargeExpressBox,
+
+        // FedEx
         FedExEnvelope,
         FedExBox,
         FedExPak,

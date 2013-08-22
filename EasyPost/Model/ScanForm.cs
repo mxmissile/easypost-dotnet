@@ -6,7 +6,8 @@ using Newtonsoft.Json;
 namespace EasyPost.Model
 {
     /// <summary>
-    /// TODO
+    /// SCAN forms are USPS specific documents that can be created to speed up and simplify your carrier parcel pickup process. 
+    /// The SCAN form is one document that can be scanned to mark all included tracking codes as "Accepted for Shipment" by the USPS.
     /// </summary>
     public class ScanForm : EasyPostBase, IEncodable
     {
