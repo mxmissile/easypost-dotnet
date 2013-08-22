@@ -1,5 +1,8 @@
-namespace EasyPost
+namespace EasyPost.Model
 {
+    /// <summary>
+    /// TODO
+    /// </summary>
     public enum ParcelType
     {
         Card,

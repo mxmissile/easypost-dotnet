@@ -1,6 +1,9 @@
-namespace EasyPost
+namespace EasyPost.Model
 {
-    public class VerifyAddressResponse : ReponseBase
+    /// <summary>
+    /// TODO
+    /// </summary>
+    public class VerifiedAddress
     {
         public Address Address { get; set; }
         public string Message { get; set; }

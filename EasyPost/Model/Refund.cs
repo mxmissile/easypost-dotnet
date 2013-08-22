@@ -1,7 +1,10 @@
 ﻿using Newtonsoft.Json;
 
-namespace EasyPost
+namespace EasyPost.Model
 {
+    /// <summary>
+    /// TODO
+    /// </summary>
     public class Refund : EasyPostBase
     {
         [JsonProperty("tracking_code")]

@@ -2,8 +2,11 @@
 using Easypost.Internal;
 using Newtonsoft.Json;
 
-namespace EasyPost
+namespace EasyPost.Model
 {
+    /// <summary>
+    /// TODO
+    /// </summary>
     public class CustomsItem : EasyPostBase, IEncodable
     {
         public string Description { get; set; }
@@ -21,14 +24,7 @@ namespace EasyPost
 
         public FormUrlEncodedContent AsFormUrlEncodedContent()
         {
-            var collection = new CollectionBuilder()
-                .AddRequired("customs_item[description]".ToKvp(Description))
-                .AddRequired("customs_item[quantity]".ToKvp(Quantity))
-                .AddRequired("customs_item[weight]".ToKvp(WeightOunces))
-                .AddRequired("customs_item[value]".ToKvp(Value.ToString()))
-                .AddRequired("customs_item[hs_tariff_number]".ToKvp(HsTariffNumber))
-                .AddRequired("customs_item[origin_country]".ToKvp(OriginCountry));
-
+            var collection = new CollectionBuilder().AddCustomsItem("customs_item", this);
             return collection.AsFormUrlEncodedContent();
         }
     }

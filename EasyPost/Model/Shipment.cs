@@ -3,8 +3,12 @@ using System.Net.Http;
 using Easypost.Internal;
 using Newtonsoft.Json;
 
-namespace EasyPost
+namespace EasyPost.Model
 {
+    /// <summary>
+    /// TODO
+    /// Required fields: ToAddress, FromAddress, Parcel
+    /// </summary>
     public class Shipment : EasyPostBase, IEncodable
     {
         [JsonProperty("to_address")]
@@ -23,11 +27,9 @@ namespace EasyPost
 
         public List<CarrierRate> Rates { get; set; }
 
-        // set after purchasing
         [JsonProperty("selected_rate")]
         public CarrierRate SelectedRate { get; set; }
 
-        // available after 'buy' has completed
         [JsonProperty("postage_label")]
         public PostageLabel PostageLabel { get; set; }
 
@@ -46,13 +48,13 @@ namespace EasyPost
 
         [JsonProperty("tracking_code")]
         public string TrackingCode { get; set; }
-        
+
         public FormUrlEncodedContent AsFormUrlEncodedContent()
         {
             var collection = new CollectionBuilder()
-                .AddRequired("shipment[to_address][id]".ToKvp(ToAddress.Id))
-                .AddRequired("shipment[from_address][id]".ToKvp(FromAddress.Id))
-                .AddRequired("shipment[parcel][id]".ToKvp(Parcel.Id));
+                .AddAddress("shipment[to_address]", ToAddress)
+                .AddAddress("shipment[from_address]", ToAddress)
+                .AddParcel("shipment[parcel]", Parcel);
 
             if (CustomsInfo != null)
             {

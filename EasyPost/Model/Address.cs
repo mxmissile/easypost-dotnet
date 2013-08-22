@@ -1,8 +1,12 @@
 using System.Net.Http;
 using Easypost.Internal;
 
-namespace EasyPost
+namespace EasyPost.Model
 {
+    /// <summary>
+    /// TODO
+    /// Required fields: Street1, Street2, City, State, Zip.
+    /// </summary>
     public class Address : EasyPostBase, IEncodable
     {
         public string Street1 { get; set; }
@@ -18,18 +22,7 @@ namespace EasyPost
 
         public FormUrlEncodedContent AsFormUrlEncodedContent()
         {
-            var collection = new CollectionBuilder()
-                    .AddRequired("address[street1]".ToKvp(Street1))
-                    .AddRequired("address[street2]".ToKvp(Street2))
-                    .AddRequired("address[city]".ToKvp(City))
-                    .AddRequired("address[state]".ToKvp(State))
-                    .AddRequired("address[zip]".ToKvp(Zip))
-                    .Add("address[country]".ToKvp(Country))
-                    .Add("address[name]".ToKvp(Name))
-                    .Add("address[company]".ToKvp(Company))
-                    .Add("address[email]".ToKvp(Email))
-                    .Add("address[phone]".ToKvp(Phone));
-
+            var collection = new CollectionBuilder().AddAddress("address", this);
             return collection.AsFormUrlEncodedContent();
         }
     }

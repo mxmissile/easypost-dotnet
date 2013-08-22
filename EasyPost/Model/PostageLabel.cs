@@ -1,8 +1,11 @@
 using System;
 using Newtonsoft.Json;
 
-namespace EasyPost
+namespace EasyPost.Model
 {
+    /// <summary>
+    /// TODO
+    /// </summary>
     public class PostageLabel : EasyPostBase
     {
         [JsonProperty("date_advance")]

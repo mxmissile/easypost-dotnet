@@ -3,8 +3,11 @@ using System.Net.Http;
 using Easypost.Internal;
 using Newtonsoft.Json;
 
-namespace EasyPost
+namespace EasyPost.Model
 {
+    /// <summary>
+    /// TODO
+    /// </summary>
     public class ScanForm : EasyPostBase, IEncodable
     {
         public Address Address { get; set; }
@@ -29,8 +32,7 @@ namespace EasyPost
             }
             else
             {
-                collection
-                    .AddRequired("scan_form[from_address][street1]".ToKvp(Address.Street1))
+                collection.AddRequired("scan_form[from_address][street1]".ToKvp(Address.Street1))
                     .AddRequired("scan_form[from_address][street2]".ToKvp(Address.Street2))
                     .AddRequired("scan_form[from_address][city]".ToKvp(Address.City))
                     .AddRequired("scan_form[from_address][state]".ToKvp(Address.State))

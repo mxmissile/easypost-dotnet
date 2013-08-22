@@ -3,8 +3,11 @@ using System.Net.Http;
 using Easypost.Internal;
 using Newtonsoft.Json;
 
-namespace EasyPost
+namespace EasyPost.Model
 {
+    /// <summary>
+    /// TODO
+    /// </summary>
     public class CustomsInfo : EasyPostBase, IEncodable
     {
         [JsonProperty("customs_items")]
@@ -48,7 +51,7 @@ namespace EasyPost
 
             for (var i = 0; i < CustomsItems.Count; i++)
             {
-                collection.Add(string.Format("customs_info[customs_items][{0}][id]", i).ToKvp(CustomsItems[i].Id));
+                collection.AddCustomsItem(string.Format("customs_info[customs_items][{0}]", i), CustomsItems[i]);
             }
 
             return collection.AsFormUrlEncodedContent();

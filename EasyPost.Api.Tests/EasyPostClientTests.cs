@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Easypost;
+using EasyPost.Model;
 using NUnit.Framework;
 
 namespace EasyPost.Api.Tests
@@ -92,7 +93,7 @@ namespace EasyPost.Api.Tests
         [Test]
         public void TestBuyingLabel()
         {
-            // TODO test this without actually buying...
+            // TODO test _client.BuyPostageLabel() without actually buying
         }
 
         [Test]
@@ -137,11 +138,30 @@ namespace EasyPost.Api.Tests
         }
 
         [Test]
+        public void TestRefunds()
+        {
+            var refunds = _client.CreateRefund(new RefundRequest
+            {
+                Carrier = "USPS",
+                TrackingCodes = new List<string> { "CJ123456789US", "LN123456789US" }
+            });
+            Assert.IsTrue(refunds.Count == 2);
+            Assert.IsNotNull(refunds[0].Id);
+
+            var sameAsRefund = _client.GetRefund(refunds[0].Id);
+            Assert.AreEqual(refunds[0].Id, sameAsRefund.Id);
+
+            var allRefunds = _client.GetRefunds();
+            var shouldExist = allRefunds.SingleOrDefault(x => string.Equals(x.Id, refunds[0].Id));
+            Assert.IsNotNull(shouldExist);
+        }
+
+        [Test]
         public void TestScanForms()
         {
             var scanForm = _client.CreateScanForm(new ScanForm
             {
-                TrackingCodes = new List<string> {"123456", "123455", "123454"},
+                TrackingCodes = new List<string> { "123456", "123455", "123454" },
                 Address = new Address
                 {
                     Name = "EasyPost",
@@ -159,25 +179,6 @@ namespace EasyPost.Api.Tests
 
             var allScanForms = _client.GetScanForms();
             var shouldExist = allScanForms.SingleOrDefault(x => string.Equals(x.Id, scanForm.Id));
-            Assert.IsNotNull(shouldExist);
-        }
-
-        [Test]
-        public void TestRefunds()
-        {
-            var refunds = _client.CreateRefund(new RefundRequest
-            {
-                Carrier = "USPS",
-                TrackingCodes = new List<string> { "CJ123456789US", "LN123456789US" }
-            });
-            Assert.IsTrue(refunds.Count == 2);
-            Assert.IsNotNull(refunds[0].Id);
-
-            var sameAsRefund = _client.GetRefund(refunds[0].Id);
-            Assert.AreEqual(refunds[0].Id, sameAsRefund.Id);
-
-            var allRefunds = _client.GetRefunds();
-            var shouldExist = allRefunds.SingleOrDefault(x => string.Equals(x.Id, refunds[0].Id));
             Assert.IsNotNull(shouldExist);
         }
     }
