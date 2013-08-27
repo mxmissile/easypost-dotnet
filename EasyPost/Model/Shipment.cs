@@ -26,6 +26,10 @@ namespace EasyPost.Model
         [JsonProperty("scan_form")]
         public ScanForm ScanForm { get; set; }
 
+        public string Reference { get; set; }
+
+        // everything below here is not posted, only retreived
+
         public List<CarrierRate> Rates { get; set; }
 
         [JsonProperty("selected_rate")]
@@ -35,7 +39,7 @@ namespace EasyPost.Model
         public PostageLabel PostageLabel { get; set; }
 
         public string Mode { get; set; }
-        public string Reference { get; set; }
+
         public double? Insurance { get; set; }
 
         [JsonProperty("batch_status")]
@@ -52,21 +56,7 @@ namespace EasyPost.Model
 
         public FormUrlEncodedContent AsFormUrlEncodedContent()
         {
-            var collection = new CollectionBuilder()
-                .AddAddress("shipment[to_address]", ToAddress)
-                .AddAddress("shipment[from_address]", ToAddress)
-                .AddParcel("shipment[parcel]", Parcel);
-
-            if (CustomsInfo != null)
-            {
-                collection.Add("shipment[customs_info][id]".ToKvp(CustomsInfo.Id));
-            }
-
-            if (ScanForm != null)
-            {
-                collection.Add("shipment[scan_form][id]".ToKvp(ScanForm.Id));
-            }
-
+            var collection = new CollectionBuilder().AddShipment("shipment", this);
             return collection.AsFormUrlEncodedContent();
         }
     }

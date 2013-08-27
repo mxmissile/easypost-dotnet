@@ -40,21 +40,7 @@ namespace EasyPost.Model
 
         public FormUrlEncodedContent AsFormUrlEncodedContent()
         {
-            var collection = new CollectionBuilder()
-                .AddRequired("customs_info[customs_certify]".ToKvp(CustomsCertify.ToString()))
-                .AddRequired("customs_info[contents_type]".ToKvp(ContentsType))
-                .AddRequired("customs_info[contents_explanation]".ToKvp(ContentsExplanation))
-                .AddRequired("customs_info[restriction_type]".ToKvp(RestrictionType))
-                .AddRequired("customs_info[eel_pfc]".ToKvp(EelPfc))
-                .Add("customs_info[customs_signer]".ToKvp(CustomsSigner))
-                .Add("customs_info[non_delivery_option]".ToKvp(NonDeliveryOption))
-                .Add("customs_info[restriction_comments]".ToKvp(RestrictionComments));
-
-            for (var i = 0; i < CustomsItems.Count; i++)
-            {
-                collection.AddCustomsItem(string.Format("customs_info[customs_items][{0}]", i), CustomsItems[i]);
-            }
-
+            var collection = new CollectionBuilder().AddCustomsInfo("customs_info", this);
             return collection.AsFormUrlEncodedContent();
         }
     }

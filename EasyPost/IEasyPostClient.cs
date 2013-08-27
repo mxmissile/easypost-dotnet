@@ -87,7 +87,16 @@ namespace EasyPost
         /// <returns>A list of available rates for the Shipment</returns>
         /// <seealso cref="http://www.easypost.com/docs#shipments"/>
         List<CarrierRate> GetShipmentRates(string shipmentId);
-        
+
+        /// <summary>
+        /// Insure your shipment by specifing its value
+        /// </summary>
+        /// <param name="shipmentId">The Id of the Shipment to insure</param>
+        /// <param name="insurance">The value of the Shipment to insure</param>
+        /// <returns>The updated Shipment</returns>
+        /// <seealso cref="http://www.easypost.com/docs#shipments"/>
+        Shipment InsureShipment(string shipmentId, Insurance insurance);
+
         /// <summary>
         /// Purchase a PostageLabel for a given Shipment and CarrierRate
         /// Warning: This costs money and will only work with a LIVE API KEY
@@ -166,6 +175,51 @@ namespace EasyPost
         /// <returns>A list of all Refunds</returns>
         /// <seealso cref="http://www.easypost.com/docs#refunds"/>
         List<Refund> GetRefunds();
+
+        /// <summary>
+        /// Create a new Batch, specifying the carrier and service for each shipment if you'd like.
+        /// </summary>
+        /// <param name="model">The Batch to create</param>
+        /// <returns>A fully populated Batch, included the new Id</returns>
+        /// <seealso cref="http://www.easypost.com/docs#batches"/>
+        Batch CreateBatch(Batch model);
+
+        /// <summary>
+        /// Retrieves an Batch by Id
+        /// </summary>
+        /// <param name="batchId">The Id of the Batch to retrieve</param>
+        /// <returns>The requested Batch</returns>
+        /// <seealso cref="http://www.easypost.com/docs#batches"/>
+        Batch GetBatch(string batchId);
+
+        /// <summary>
+        /// Query for all Batches
+        /// </summary>
+        /// <returns>A list of all Batches</returns>
+        /// <seealso cref="http://www.easypost.com/docs#batches"/>
+        List<Batch> GetBatches();
+
+        /// <summary>
+        /// Buy an existing Batch or create and buy a new Batch, specifying the carrier and service for each shipment if you'd like.
+        /// After the method is called we will automatically purchase the requested shipping labels and update the batch status accordingly. 
+        /// Postage labels are purchased and created asyncronously, so polling the batch object is recommended to determine its updated status.
+        /// Warning: This costs money and will only work with a LIVE API KEY
+        /// </summary>
+        /// <param name="model">The Batch to purchase</param>
+        /// <returns>The updated Batch, which may have the label url</returns>
+        /// <seealso cref="http://www.easypost.com/docs#batches"/>
+        Batch BuyBatch(Batch model);
+
+        /// <summary>
+        /// Retrieve the postage labels for the entire batch in one file, in 'pdf' or 'epl2' format.
+        /// This can only be done once all shipments in the batch are in 'postage_purchased' status. 
+        /// Batch label generation is asyncronous, so polling the batch object for the presense of a non-empty label_url is recommended.
+        /// </summary>
+        /// <param name="batchId">The Id of the Batch</param>
+        /// <param name="label">The BatchLabel to generate</param>
+        /// <returns>The updated Batch</returns>
+        /// <seealso cref="http://www.easypost.com/docs#batches"/>
+        Batch GenerateBatchLabel(string batchId, BatchLabel label);
 
         /// <summary>
         /// Creates a new ScanForm

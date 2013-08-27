@@ -18,9 +18,8 @@ namespace EasyPost.Model
 
         public FormUrlEncodedContent AsFormUrlEncodedContent()
         {
-            return new CollectionBuilder()
-                .AddRequired("rate[id]".ToKvp(Id))
-                .AsFormUrlEncodedContent();
+            var collection = new CollectionBuilder().AddRequired("rate[id]".ToKvp(Id));
+            return collection.AsFormUrlEncodedContent();
         }
     }
 }

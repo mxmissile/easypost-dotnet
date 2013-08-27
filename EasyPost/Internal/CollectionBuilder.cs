@@ -88,5 +88,68 @@ namespace Easypost.Internal
                 .AddRequired("[hs_tariff_number]".ToKvp(keyBase, item.HsTariffNumber))
                 .AddRequired("[origin_country]".ToKvp(keyBase, item.OriginCountry));
         }
+
+        public CollectionBuilder AddScanForm(string keyBase, ScanForm form)
+        {
+            if (!string.IsNullOrEmpty(form.Id))
+            {
+                return Add("[id]".ToKvp(keyBase, form.Id));
+            }
+
+            return AddRequired("[tracking_codes]".ToKvp(keyBase, string.Join(",", form.TrackingCodes)))
+                .AddAddress(keyBase + "[from_address]", form.Address);
+        }
+
+        public CollectionBuilder AddCustomsInfo(string keyBase, CustomsInfo info)
+        {
+            if (!string.IsNullOrEmpty(info.Id))
+            {
+                return Add("[id]".ToKvp(keyBase, info.Id));
+            }
+
+            AddRequired("[customs_certify]".ToKvp(keyBase, info.CustomsCertify.ToString()));
+            AddRequired("[contents_type]".ToKvp(keyBase, info.ContentsType));
+            AddRequired("[contents_explanation]".ToKvp(keyBase, info.ContentsExplanation));
+            AddRequired("[restriction_type]".ToKvp(keyBase, info.RestrictionType));
+            AddRequired("[eel_pfc]".ToKvp(keyBase, info.EelPfc));
+            Add("[customs_signer]".ToKvp(keyBase, info.CustomsSigner));
+            Add("[non_delivery_option]".ToKvp(keyBase, info.NonDeliveryOption));
+            Add("[restriction_comments]".ToKvp(keyBase, info.RestrictionComments));
+
+            if (info.CustomsItems != null)
+            {
+                for (var i = 0; i < info.CustomsItems.Count; i++)
+                {
+                    AddCustomsItem(string.Format("{0}[customs_items][{1}]", keyBase, i), info.CustomsItems[i]);
+                }
+            }
+
+            return this;
+        }
+
+        public CollectionBuilder AddShipment(string keyBase, Shipment shipment)
+        {
+            if (!string.IsNullOrEmpty(shipment.Id))
+            {
+                return Add("[id]".ToKvp(keyBase, shipment.Id));
+            }
+
+            AddAddress(keyBase + "[from_address]", shipment.FromAddress);
+            AddAddress(keyBase + "[to_address]", shipment.ToAddress);
+            AddParcel(keyBase + "[parcel]", shipment.Parcel);
+            Add("[reference]".ToKvp(keyBase, shipment.Reference));
+
+            if (shipment.CustomsInfo != null)
+            {
+                AddCustomsInfo(keyBase + "[customs_info]", shipment.CustomsInfo);
+            }
+
+            if (shipment.ScanForm != null)
+            {
+                AddScanForm(keyBase + "[scan_form]", shipment.ScanForm);
+            }
+
+            return this;
+        }
     }
 }

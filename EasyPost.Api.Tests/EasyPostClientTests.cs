@@ -87,6 +87,11 @@ namespace EasyPost.Api.Tests
 
             var rates = _client.GetShipmentRates(shipment.Id);
             Assert.AreEqual(rates.Count, shipment.Rates.Count);
+
+            var insurance = new Insurance {Amount = 80.5};
+            var insuredShipment = _client.InsureShipment(shipment.Id, insurance);
+            Assert.AreEqual(shipment.Id, insuredShipment.Id);
+            Assert.AreEqual(shipment.Insurance, insurance.Amount);
         }
 
         [Test]
@@ -153,6 +158,48 @@ namespace EasyPost.Api.Tests
             var allRefunds = _client.GetRefunds();
             var shouldExist = allRefunds.SingleOrDefault(x => string.Equals(x.Id, refunds[0].Id));
             Assert.IsNotNull(shouldExist);
+        }
+
+        [Test]
+        public void TestBatches()
+        {
+            var addresses = _client.GetAddresses();
+            var parcels = _client.GetParcels();
+
+            var batch = _client.CreateBatch(new Batch
+            {
+                Shipments = new List<BatchShipment>
+                {
+                    new BatchShipment
+                    {
+                        Parcel = parcels[0],
+                        FromAddress = addresses[0],
+                        ToAddress = addresses[1],
+                        Carrier = "USPS",
+                        Service = "Priority",
+                    },
+                    new BatchShipment
+                    {
+                        Parcel = parcels[1],
+                        FromAddress = addresses[1],
+                        ToAddress = addresses[2],
+                    },
+                }
+            });
+            Assert.IsNotNull(batch.Id);
+
+            var sameAsBatch = _client.GetScanForm(batch.Id);
+            Assert.AreEqual(batch.Id, sameAsBatch.Id);
+
+            var allBatches = _client.GetBatches();
+            var shouldExist = allBatches.SingleOrDefault(x => string.Equals(x.Id, batch.Id));
+            Assert.IsNotNull(shouldExist);
+        }
+
+        [Test]
+        public void TestBuyingBatch()
+        {
+            // TODO test _client.BuyBatch() and _client.GenerateBatchLabel() without actually buying
         }
 
         [Test]

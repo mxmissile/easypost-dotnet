@@ -45,11 +45,14 @@
     <Compile Include="IEasyPostClient.cs" />
     <Compile Include="Model\Address.cs" />
     <Compile Include="Internal\BuyPostageLabelResponse.cs" />
+    <Compile Include="Model\Batch.cs" />
+    <Compile Include="Model\BatchLabel.cs" />
     <Compile Include="Model\CarrierRate.cs" />
     <Compile Include="Internal\CollectionBuilder.cs" />
     <Compile Include="Internal\CollectionExtensions.cs" />
     <Compile Include="Model\CustomsInfo.cs" />
     <Compile Include="Model\CustomsItem.cs" />
+    <Compile Include="Model\Insurance.cs" />
     <Compile Include="Model\ParcelType.cs" />
     <Compile Include="Model\RefundRequest.cs" />
     <Compile Include="Model\Refund.cs" />

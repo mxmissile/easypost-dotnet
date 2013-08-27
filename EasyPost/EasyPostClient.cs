@@ -156,6 +156,19 @@ namespace EasyPost
         }
 
         /// <summary>
+        /// Insure your shipment by specifing its value
+        /// </summary>
+        /// <param name="shipmentId">The Id of the Shipment to insure</param>
+        /// <param name="insurance">The value of the Shipment to insure</param>
+        /// <returns>The updated Shipment</returns>
+        /// <seealso cref="http://www.easypost.com/docs#shipments"/>
+        public Shipment InsureShipment(string shipmentId, Insurance insurance)
+        {
+            var url = string.Format(EasyPostUrls.SHIPMENT_INSURE, shipmentId);
+            return Execute<Shipment>(insurance, url);
+        }
+
+        /// <summary>
         /// Purchase a PostageLabel for a given Shipment and CarrierRate
         /// Warning: This costs money and will only work with a LIVE API KEY
         /// </summary>
@@ -270,6 +283,68 @@ namespace EasyPost
         }
 
         /// <summary>
+        /// Create a new Batch, specifying the carrier and service for each shipment if you'd like.
+        /// </summary>
+        /// <param name="model">The Batch to create</param>
+        /// <returns>A fully populated Batch, included the new Id</returns>
+        /// <seealso cref="http://www.easypost.com/docs#batches"/>
+        public Batch CreateBatch(Batch model)
+        {
+            return Execute<Batch>(model, EasyPostUrls.BATCHES);
+        }
+
+        /// <summary>
+        /// Retrieves an Batch by Id
+        /// </summary>
+        /// <param name="batchId">The Id of the Batch to retrieve</param>
+        /// <returns>The requested Batch</returns>
+        /// <seealso cref="http://www.easypost.com/docs#batches"/>
+        public Batch GetBatch(string batchId)
+        {
+            var url = string.Format(EasyPostUrls.BATCH, batchId);
+            return Execute<Batch>(url);
+        }
+
+        /// <summary>
+        /// Query for all Batches
+        /// </summary>
+        /// <returns>A list of all Batches</returns>
+        /// <seealso cref="http://www.easypost.com/docs#batches"/>
+        public List<Batch> GetBatches()
+        {
+            return Execute<List<Batch>>(EasyPostUrls.BATCHES);
+        }
+
+        /// <summary>
+        /// Buy an existing Batch or create and buy a new Batch, specifying the carrier and service for each shipment if you'd like.
+        /// After the method is called we will automatically purchase the requested shipping labels and update the batch status accordingly. 
+        /// Postage labels are purchased and created asyncronously, so polling the batch object is recommended to determine its updated status.
+        /// Warning: This costs money and will only work with a LIVE API KEY
+        /// </summary>
+        /// <param name="model">The Batch to purchase</param>
+        /// <returns>The updated Batch, which may have the label url</returns>
+        /// <seealso cref="http://www.easypost.com/docs#batches"/>
+        public Batch BuyBatch(Batch model)
+        {
+            return Execute<Batch>(model, EasyPostUrls.BATCHES_BUY);
+        }
+
+        /// <summary>
+        /// Retrieve the postage labels for the entire batch in one file, in 'pdf' or 'epl2' format.
+        /// This can only be done once all shipments in the batch are in 'postage_purchased' status. 
+        /// Batch label generation is asyncronous, so polling the batch object for the presense of a non-empty label_url is recommended.
+        /// </summary>
+        /// <param name="batchId">The Id of the Batch</param>
+        /// <param name="label">The BatchLabel to generate</param>
+        /// <returns>The updated Batch</returns>
+        /// <seealso cref="http://www.easypost.com/docs#batches"/>
+        public Batch GenerateBatchLabel(string batchId, BatchLabel label)
+        {
+            var url = string.Format(EasyPostUrls.BATCH_LABEL, batchId);
+            return Execute<Batch>(label, url);
+        }
+
+        /// <summary>
         /// Creates a new ScanForm
         /// </summary>
         /// <param name="model">The ScanForm to be created on the server</param>
@@ -333,14 +408,17 @@ namespace EasyPost
             public const string SHIPMENT = "shipments/{0}";
             public const string SHIPMENT_RATES = "shipments/{0}/rates";
             public const string SHIPMENT_BUY = "shipments/{0}/buy";
+            public const string SHIPMENT_INSURE = "shipments/{0}/insure";
             public const string CUSTOM_ITEMS = "customs_items";
             public const string CUSTOM_ITEM = "customs_items/{0}";
             public const string CUSTOM_INFOS = "customs_infos";
             public const string CUSTOM_INFO = "customs_infos/{0}";
             public const string REFUNDS = "refunds";
             public const string REFUND = "refunds/{0}";
-            //public const string BATCHES = "batches";
-            //public const string BATCH = "batches/{0}";
+            public const string BATCHES = "batches";
+            public const string BATCH = "batches/{0}";
+            public const string BATCHES_BUY = "batches/create_and_buy";
+            public const string BATCH_LABEL = "batches/{0}/label";
             public const string SCAN_FORMS = "scan_forms";
             public const string SCAN_FORM = "scan_forms/{0}";
         }
