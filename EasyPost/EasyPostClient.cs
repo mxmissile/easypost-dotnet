@@ -30,7 +30,6 @@ namespace EasyPost
                 AllowAutoRedirect = true,
                 UseProxy = true,
             };
-
             _client = new HttpClient(handler)
             {
                 BaseAddress = new Uri(EasyPostUrls.BASE_URL)

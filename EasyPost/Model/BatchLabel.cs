@@ -19,6 +19,9 @@ namespace EasyPost.Model
         }
     }
 
+    /// <summary>
+    /// File format for a BatchLabel
+    /// </summary>
     public enum BatchLabelFormat
     {
         Pdf,

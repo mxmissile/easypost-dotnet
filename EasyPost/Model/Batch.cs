@@ -5,6 +5,10 @@ using Newtonsoft.Json;
 
 namespace EasyPost.Model
 {
+    /// <summary>
+    /// Batches allow you to create a large number of shipments at one time,
+    /// and retrieve details and shipping labels for them all at once.
+    /// </summary>
     public class Batch : EasyPostBase, IEncodable
     {
         [JsonProperty("label_url")]
@@ -36,12 +40,19 @@ namespace EasyPost.Model
         }
     }
 
+    /// <summary>
+    /// Special Shipment object for batch shipments, which allows
+    /// specifying a carrier and service for a batch.
+    /// </summary>
     public class BatchShipment : Shipment
     {
         public string Carrier { get; set; }
         public string Service { get; set; }
     }
 
+    /// <summary>
+    /// Contains counts for the shipment statuses.
+    /// </summary>
     public class BatchStatus
     {
         [JsonProperty("created")]

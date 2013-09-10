@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using EasyPost;
 using EasyPost.Model;
 
 namespace Easypost.Internal

@@ -5,7 +5,7 @@ namespace EasyPost.Model
 {
     /// <summary>
     /// Address objects represent the origin and destination of any shipment, and are required in order to get rates and purchase postage.
-    // The phone attribute, and either a name or company are required for addresses used as a "from" address in a shipment.
+    /// The phone attribute, and either a name or company are required for addresses used as a "from" address in a shipment.
     /// </summary>
     public class Address : EasyPostBase, IEncodable
     {

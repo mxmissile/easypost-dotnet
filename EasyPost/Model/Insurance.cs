@@ -3,6 +3,9 @@ using Easypost.Internal;
 
 namespace EasyPost.Model
 {
+    /// <summary>
+    /// Used to insure a shipment, simply the dollar amount.
+    /// </summary>
     public class Insurance : IEncodable
     {
         public double Amount { get; set; }

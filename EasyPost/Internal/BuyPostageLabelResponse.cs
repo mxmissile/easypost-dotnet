@@ -1,4 +1,3 @@
-using EasyPost;
 using EasyPost.Model;
 using Newtonsoft.Json;
 
