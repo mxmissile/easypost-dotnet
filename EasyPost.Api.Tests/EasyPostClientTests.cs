@@ -10,10 +10,13 @@ namespace EasyPost.Api.Tests
     {
         private IEasyPostClient _client;
 
+        // FILL THIS IN
+        private const string TEST_API_KEY = "TEST_KEY_HERE";
+
         [SetUp]
         public void Setup()
         {
-            _client = new EasyPostClient("TEST_API_KEY");
+            _client = new EasyPostClient(TEST_API_KEY);
         }
 
         [Test]
@@ -87,21 +90,30 @@ namespace EasyPost.Api.Tests
 
             var rates = _client.GetShipmentRates(shipment.Id);
             Assert.AreEqual(rates.Count, shipment.Rates.Count);
-
-            // TODO this is failing with 400 (Bad Request)
-            // maybe you need to pay for a shipment before setting insurance?
-            /*
-            var insurance = new Insurance {Amount = 80.5};
-            var insuredShipment = _client.InsureShipment(shipment.Id, insurance);
-            Assert.AreEqual(shipment.Id, insuredShipment.Id);
-            Assert.AreEqual(shipment.Insurance, insurance.Amount);
-            */
         }
 
         [Test]
-        public void TestBuyingLabel()
+        public void TestBuyingLabelAndInsurance()
         {
-            // TODO test _client.BuyPostageLabel() without actually buying
+            var addresses = _client.GetAddresses();
+            var parcels = _client.GetParcels();
+
+            var shipment = _client.CreateShipment(new Shipment
+            {
+                Parcel = parcels.First(x => x.PredefinedPackage == null),
+                FromAddress = addresses.First(x => x.City == "SAN FRANCISCO"),
+                ToAddress = addresses.First(x => x.City == "MEREDITH"),
+            });
+
+            var label = _client.BuyPostageLabel(shipment.Id, shipment.Rates.First());
+            Assert.IsNotNull(label.Id);
+
+            var nowHasSelectedRate = _client.GetShipment(shipment.Id);
+            Assert.IsNotNull(nowHasSelectedRate.SelectedRate.Id);
+
+            var insuredShipment = _client.InsureShipment(shipment.Id, 80.5);
+            Assert.AreEqual(insuredShipment.Id, shipment.Id);
+            Assert.AreEqual(insuredShipment.Insurance, 80.5);
         }
 
         [Test]
@@ -210,7 +222,7 @@ namespace EasyPost.Api.Tests
         [Test]
         public void TestBuyingBatch()
         {
-            // TODO test _client.BuyBatch() and _client.GenerateBatchLabel() without actually buying
+            // TODO test _client.BuyBatch and _client.GenerateBatchLabel
         }
 
         [Test]

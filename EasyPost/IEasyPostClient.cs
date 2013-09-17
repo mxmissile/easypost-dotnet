@@ -92,10 +92,10 @@ namespace EasyPost
         /// Insure your shipment by specifing its value
         /// </summary>
         /// <param name="shipmentId">The Id of the Shipment to insure</param>
-        /// <param name="insurance">The value of the Shipment to insure</param>
+        /// <param name="amount">The value of the Shipment to insure in USD</param>
         /// <returns>The updated Shipment</returns>
         /// <seealso cref="http://www.easypost.com/docs#shipments"/>
-        Shipment InsureShipment(string shipmentId, Insurance insurance);
+        Shipment InsureShipment(string shipmentId, double amount);
 
         /// <summary>
         /// Purchase a PostageLabel for a given Shipment and CarrierRate
@@ -216,10 +216,10 @@ namespace EasyPost
         /// Batch label generation is asyncronous, so polling the batch object for the presense of a non-empty label_url is recommended.
         /// </summary>
         /// <param name="batchId">The Id of the Batch</param>
-        /// <param name="label">The BatchLabel to generate</param>
+        /// <param name="labelFormat">The BatchLabelFormat to generate</param>
         /// <returns>The updated Batch</returns>
         /// <seealso cref="http://www.easypost.com/docs#batches"/>
-        Batch GenerateBatchLabel(string batchId, BatchLabel label);
+        Batch GenerateBatchLabel(string batchId, BatchLabelFormat labelFormat);
 
         /// <summary>
         /// Creates a new ScanForm

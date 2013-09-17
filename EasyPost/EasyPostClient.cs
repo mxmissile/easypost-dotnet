@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using Easypost.Internal;
+using EasyPost.Internal;
 using EasyPost.Model;
 using Newtonsoft.Json;
 
@@ -82,7 +83,20 @@ namespace EasyPost
         public VerifiedAddress VerifyAddress(string addressId)
         {
             var url = string.Format(EasyPostUrls.ADDRESS_VERIFY, addressId);
-            return Execute<VerifiedAddress>(url);
+
+            // EasyPost docs say they return "Address Not Found", but actually API returns a 400
+            try
+            {
+                return Execute<VerifiedAddress>(url);
+            }
+            catch (HttpRequestException)
+            {
+                return new VerifiedAddress
+                {
+                    Address = null,
+                    Message = "Address Not Found.",
+                };
+            }
         }
 
         /// <summary>
@@ -158,11 +172,12 @@ namespace EasyPost
         /// Insure your shipment by specifing its value
         /// </summary>
         /// <param name="shipmentId">The Id of the Shipment to insure</param>
-        /// <param name="insurance">The value of the Shipment to insure</param>
+        /// <param name="amount">The value of the Shipment to insure in USD</param>
         /// <returns>The updated Shipment</returns>
         /// <seealso cref="http://www.easypost.com/docs#shipments"/>
-        public Shipment InsureShipment(string shipmentId, Insurance insurance)
+        public Shipment InsureShipment(string shipmentId, double amount)
         {
+            var insurance = new Insurance {Amount = amount};
             var url = string.Format(EasyPostUrls.SHIPMENT_INSURE, shipmentId);
             return Execute<Shipment>(insurance, url);
         }
@@ -334,11 +349,12 @@ namespace EasyPost
         /// Batch label generation is asyncronous, so polling the batch object for the presense of a non-empty label_url is recommended.
         /// </summary>
         /// <param name="batchId">The Id of the Batch</param>
-        /// <param name="label">The BatchLabel to generate</param>
+        /// <param name="labelFormat">The BatchLabelFormat to generate</param>
         /// <returns>The updated Batch</returns>
         /// <seealso cref="http://www.easypost.com/docs#batches"/>
-        public Batch GenerateBatchLabel(string batchId, BatchLabel label)
+        public Batch GenerateBatchLabel(string batchId, BatchLabelFormat labelFormat)
         {
+            var label = new BatchLabel {FileFormat = labelFormat};
             var url = string.Format(EasyPostUrls.BATCH_LABEL, batchId);
             return Execute<Batch>(label, url);
         }

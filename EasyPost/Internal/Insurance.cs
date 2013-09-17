@@ -1,12 +1,9 @@
 ﻿using System.Net.Http;
 using Easypost.Internal;
 
-namespace EasyPost.Model
+namespace EasyPost.Internal
 {
-    /// <summary>
-    /// Used to insure a shipment, simply the dollar amount.
-    /// </summary>
-    public class Insurance : IEncodable
+    internal class Insurance : IEncodable
     {
         public double Amount { get; set; }
 

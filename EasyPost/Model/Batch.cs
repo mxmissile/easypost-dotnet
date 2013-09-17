@@ -41,27 +41,11 @@ namespace EasyPost.Model
     }
 
     /// <summary>
-    /// Special Shipment object for batch shipments, which allows
-    /// specifying a carrier and service for a batch.
+    /// File format for a BatchLabel
     /// </summary>
-    public class BatchShipment : Shipment
+    public enum BatchLabelFormat
     {
-        public string Carrier { get; set; }
-        public string Service { get; set; }
-    }
-
-    /// <summary>
-    /// Contains counts for the shipment statuses.
-    /// </summary>
-    public class BatchStatus
-    {
-        [JsonProperty("created")]
-        public int CreatedCount { get; set; }
-
-        [JsonProperty("postage_purchased")]
-        public int PostagePurchasedCount { get; set; }
-        
-        [JsonProperty("postage_purchase_failed")]
-        public int PostagePurchaseFailedCount { get; set; }
+        Pdf,
+        Epl2,
     }
 }
