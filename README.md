@@ -42,12 +42,14 @@ Client library for accessing the EasyPost Shipping API via C#
     
 #### Step 4 - Create shipment
 
-    var shipment = easyPost.CreateShipment(new Shipment
+    var shipment = new Shipment
     {
         FromAddress = fromAddress,
         ToAddress = toAddress,
         Parcel = customParcel,
     });
+    shipment.Options.Add("delivery_confirmation", "SIGNATURE");
+    shipment = easyPost.CreateShipment(shipment);
 
 #### Step 5 - Buy postage label
 
