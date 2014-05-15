@@ -138,6 +138,12 @@ namespace Easypost.Internal
             AddParcel(keyBase + "[parcel]", shipment.Parcel);
             Add("[reference]".ToKvp(keyBase, shipment.Reference));
 
+            var optionsKeyBase = keyBase + "[options]";
+            foreach (var option in shipment.Options)
+            {
+                Add(new KeyValuePair<string, string>(optionsKeyBase + option.Key, option.Value));
+            }
+
             if (shipment.CustomsInfo != null)
             {
                 AddCustomsInfo(keyBase + "[customs_info]", shipment.CustomsInfo);
