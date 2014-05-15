@@ -58,9 +58,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Easypost\EasyPost.csproj">
+    <ProjectReference Include="..\Easypost.Api\EasyPost.Api.csproj">
       <Project>{a6947b9d-d1b2-4f9d-a7b3-05731e76a547}</Project>
-      <Name>EasyPost</Name>
+      <Name>EasyPost.Api</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

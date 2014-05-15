@@ -1,0 +1,18 @@
+﻿<?xml version="1.0"?>
+<package>
+    <metadata>
+        <id>EasyPost.Api</id>
+        <version>1.0.1</version>
+        <title>EasyPost.Api</title>
+        <authors>Alden Quimby</authors>
+        <owners>easypost</owners>
+        <licenseUrl>https://raw.github.com/aldenquimby/easypost-dotnet/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/aldenquimby/easypost-dotnet</projectUrl>
+        <iconUrl>https://www.easypost.com/favicon.ico</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>A simple C# wrapper for the EasyPost Shipping API</description>
+        <copyright>Copyright 2014</copyright>
+        <language>en-US</language>
+        <tags>parcel shipping fedex usps ups api easypost</tags>
+    </metadata>
+</package>
