@@ -55,3 +55,6 @@ Client library for accessing the EasyPost Shipping API via C#
     
     var label = easyPost.BuyPostageLabel(shipment.Id, cheapestRate);
 
+## Installation
+
+Add this to your project using <a href="https://www.nuget.org/packages/EasyPost.Api/" target="_blank">NuGet</a>. 
