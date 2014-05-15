@@ -12,6 +12,11 @@ namespace EasyPost.Model
     /// </summary>
     public class Shipment : EasyPostBase, IEncodable
     {
+        public Shipment()
+        {
+            Options = new Dictionary<string, string>();
+        }
+
         [JsonProperty("to_address")]
         public Address ToAddress { get; set; }
 
@@ -27,6 +32,8 @@ namespace EasyPost.Model
         public ScanForm ScanForm { get; set; }
 
         public string Reference { get; set; }
+        
+        public Dictionary<string, string> Options { get; set; }
 
         // everything below here is not posted, only retreived
 
