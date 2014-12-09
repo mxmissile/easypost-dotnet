@@ -11,7 +11,7 @@ namespace EasyPost.Api.Tests
         private IEasyPostClient _client;
 
         // FILL THIS IN
-        private const string TEST_API_KEY = "TEST_KEY_HERE";
+        private const string TEST_API_KEY = "cb2m3fqI5iLjoZxEPZLFBA";
 
         [SetUp]
         public void Setup()
